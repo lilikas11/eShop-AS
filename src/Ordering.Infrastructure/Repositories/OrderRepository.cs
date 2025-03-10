@@ -1,4 +1,6 @@
 ﻿namespace eShop.Ordering.Infrastructure.Repositories;
+using System.Diagnostics;
+
 
 public class OrderRepository
     : IOrderRepository
@@ -12,8 +14,17 @@ public class OrderRepository
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
+    private static readonly ActivitySource ActivitySource = new("Ordering.API");
+
     public Order Add(Order order)
     {
+
+        using var activity = ActivitySource.StartActivity("Database - Insert Order");
+
+        activity?.SetTag("db.system", "sql");
+        activity?.SetTag("db.operation", "INSERT");
+        activity?.SetTag("order.id", order.Id);
+        
         return _context.Orders.Add(order).Entity;
 
     }
