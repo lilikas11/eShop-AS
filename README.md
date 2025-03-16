@@ -9,6 +9,13 @@ The selected feature is the Order Processing flow, which establishes the process
 ### Why was this feature chosen?
 The feature was suggested by the project requirements, but it was also chosen because it handles personal data and is a feature that needs to obtain logs of errors and malfunctions.
 
+### Flow
+```markdown
+1. Order Creation
+2. Save on Database
+3. Set Paid Order Status or Cancel Order (if Payment Fails)
+```
+
 
 ### Technologies Used:
 - **OpenTelemetry** for instrumentation and tracing
